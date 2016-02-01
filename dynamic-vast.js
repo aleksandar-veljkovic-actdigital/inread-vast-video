@@ -1,0 +1,61 @@
+;
+(function ($) {
+  window.dynamicVast = function (vastUrl) {
+
+    var _this = this;
+    this.vastUrl = vastUrl;
+    this.ready = false;
+
+    $.ajax({
+      type: "GET",
+      url: this.vastUrl,
+      //dataType: 'text',
+      success: function (result) {
+        _this.result = result;
+        _this.mediaFileUrl = $(result).find('Linear MediaFiles MediaFile').text().trim();
+        _this.clickTrought = $(result).find('Linear VideoClicks ClickThrough').text().trim();
+        _this.trackingEventsXML = $(result).find('Linear TrackingEvents Tracking');
+        TrackingEventsCreator(_this.trackingEventsXML);
+        _this.ready = true;
+        $(_this).trigger('ready', result);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        $(_this).trigger('error', [jqXHR, textStatus, errorThrown]);
+      }
+    });
+
+    this.trackingEvents = {};
+
+    var TrackingEventsCreator = function (trackingEventsXML) {
+      $.each(trackingEventsXML, function (i, o) {
+        var name = $(o).attr('event');
+        var url = $(o).text().trim();
+        _this.trackingEvents[name] = function () {
+          $.ajax({
+            url: url,
+            error: function(e){
+              console.log(JSON.stringify(e))
+            }
+          });
+          return;
+          var img = new Image();
+          img.src = url;
+        };
+      });
+    };
+
+    this.track = function (name) {
+      try {
+        _this.trackingEvents[name]();
+      }
+      catch (e) {
+        window.console = window.console || {};
+        window.console.log = window.console.log || function () {
+        };
+        console.log('vast tracker error:' + e);
+      }
+    };
+
+    return this;
+  };
+})(jQuery);

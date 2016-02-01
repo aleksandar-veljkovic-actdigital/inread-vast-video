@@ -1,0 +1,26 @@
+#mainContainer {
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+}
+
+p {
+  font-size: 24px;
+}
+
+#ad-in-read-holder {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 1s;
+}
+
+#ad-in-read-holder.played {
+  max-height: 1000px;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
