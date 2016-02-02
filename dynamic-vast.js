@@ -16,8 +16,13 @@
         _this.clickTrought = $(result).find('Linear VideoClicks ClickThrough').text().trim();
         _this.trackingEventsXML = $(result).find('Linear TrackingEvents Tracking');
         TrackingEventsCreator(_this.trackingEventsXML);
-        _this.ready = true;
-        $(_this).trigger('ready', result);
+        if (!!_this.mediaFileUrl) {
+          _this.ready = true;
+          $(_this).trigger('ready', result);
+        }
+        else {
+          $(_this).trigger('empty', result);
+        }
       },
       error: function (jqXHR, textStatus, errorThrown) {
         $(_this).trigger('error', [jqXHR, textStatus, errorThrown]);
@@ -33,8 +38,8 @@
         _this.trackingEvents[name] = function () {
           $.ajax({
             url: url,
-            error: function(e){
-              console.log(JSON.stringify(e))
+            error: function (e) {
+              console.log(JSON.stringify(e));
             }
           });
           return;
