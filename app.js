@@ -18,16 +18,16 @@
 
   // go go go 
   var inviewStart = function () {
-    
+
     vastReady = function () {
       // functions
       $(player).on('click', function () {
-        if (player.paused && player.currentTime === 0) {
+        if (player.paused /*&& player.currentTime === 0*/) {
           player.play();
         }
         else {
           window.open(
-                  'http://www.google.com',
+                  vast.clickTrought,
                   '_blank'
                   );
         }
@@ -50,6 +50,7 @@
       });
       $(player).on('ended', function () {
         $container.removeClass('played');
+        player.src = "";      
       });
       // analytics
       $(player).one('play', function (e) {
@@ -64,11 +65,13 @@
         }
       });
       $(player).on('volumechange', function (e) {
-        if (player.muted) {
-          vast.track('mute');
-        }
-        else {
-          vast.track('unmute');
+        if (!player.paused) {
+          if (player.muted) {
+            vast.track('mute');
+          }
+          else {
+            vast.track('unmute');
+          }
         }
       });
       var pct75 = function () {
@@ -102,11 +105,16 @@
         vast.track('complete');
       });
       // run handler
-      player.src = vast.mediaFileUrl;
+      if (vast.mediaFileUrl.toLowerCase().indexOf("kaltura") !== -1) {
+        var partnerId = vast.mediaFileUrl.match(/\/p\/([0-9]+)\//)[1];
+        var entityId = vast.mediaFileUrl.match(/\/entryId\/([A-Za-z0-9\-\_]+)\//)[1];        
+        player.poster = "http://cfvod.kaltura.com/p/"+partnerId+"/thumbnail/entry_id/"+entityId+"/width/600";
+      }
+      player.src = vast.mediaFileUrl;      
       $container.addClass('played');
       player.play();
     };
-    
+
     // vast is ready -> play video 
     if (vast.ready) {
       vastReady();
@@ -115,7 +123,7 @@
         vastReady();
       });
     }
-    
+
   };
 
 })();
