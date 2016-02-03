@@ -1,12 +1,24 @@
 ;
 (function () {
 
-  var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
-  //var VASTURL = 'preroll.php?auid=537209182&vars=Jm1haW4tdGVybT1iZWF1dHkmdGVybT1uYWlscyZ0ZXJtPW5haWwtY2FyZSZqdXN0cHJlbWl1bT1mYWxzZQ==';
-  var player = document.getElementById('video-inread');
-  var $container = $('#ad-in-read-holder');
+  // dev/production fixes
+  window.ox_vars = window.ox_vars || {
+    'init': function () {
+    },
+    'setVars': function () {
+      return "";
+    }};
+  window.ox_vars.init();
+  var custVars = ox_vars.setVars();
+  var oxParms = custVars !== '' ? '/' + custVars : '';
+  var VASTURL = window.inreadVastVideoVASTURL || '/preroll/544403' + oxParms;   //var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
+  
+  // templating & referencing objects
+  var player = $('<video id="video-inread" preload="auto" autoplay class="video-inread"></video>')[0];
+  var $container = $('#ad-in-read-holder');  
+  $('<div class="video-inread-wrap"></div>').append( player ).append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />').appendTo($container);  
 
-  // pull vast file as soon as posible
+  // pull vast file
   var vast = new dynamicVast(VASTURL);
 
   // adVideo container is in view for the first time
@@ -20,9 +32,9 @@
   var inviewStart = function () {
 
     vastReady = function () {
-      // functions
-      $(player).on('click', function () {
-        if (player.paused /*&& player.currentTime === 0*/) {
+      // functionalities
+      $container.on('click', function () {
+        if (player.paused) {
           player.play();
         }
         else {
@@ -32,14 +44,27 @@
                   );
         }
       });
-      $(player).hover(
-              function () {
-                player.muted = false;
-              },
-              function () {
-                player.muted = true;
-              }
-      );
+      $container.addClass('paused');
+      $(player).on('play', function () {
+        $container.removeClass('paused');
+      });
+      $(player).on('pause', function () {
+        $container.addClass('paused');
+      });
+      if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
+        player.muted = false;
+      }
+      else {
+        player.muted = true;
+        $(player).hover(
+                function () {
+                  player.muted = false;
+                },
+                function () {
+                  player.muted = true;
+                }
+        );
+      }
       $container.on('inview', function (event, isInView) {
         if (isInView) {
           player.play();
@@ -49,8 +74,8 @@
         }
       });
       $(player).on('ended', function () {
-        $container.removeClass('played');
-        player.src = "";      
+        $container.removeClass('expanded');
+        player.src = "";
       });
       // analytics
       $(player).one('play', function (e) {
@@ -107,11 +132,11 @@
       // run handler
       if (vast.mediaFileUrl.toLowerCase().indexOf("kaltura") !== -1) {
         var partnerId = vast.mediaFileUrl.match(/\/p\/([0-9]+)\//)[1];
-        var entityId = vast.mediaFileUrl.match(/\/entryId\/([A-Za-z0-9\-\_]+)\//)[1];        
-        player.poster = "http://cfvod.kaltura.com/p/"+partnerId+"/thumbnail/entry_id/"+entityId+"/width/600";
+        var entityId = vast.mediaFileUrl.match(/\/entryId\/([A-Za-z0-9\-\_]+)\//)[1];
+        player.poster = "http://cfvod.kaltura.com/p/" + partnerId + "/thumbnail/entry_id/" + entityId + "/width/600";
       }
-      player.src = vast.mediaFileUrl;      
-      $container.addClass('played');
+      player.src = vast.mediaFileUrl;
+      $container.addClass('expanded');
       player.play();
     };
 

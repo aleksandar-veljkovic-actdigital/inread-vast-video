@@ -12,13 +12,27 @@ p {
   max-height: 0;
   overflow: hidden;
   transition: all 1s;
+  position: relative;
 }
 
-#ad-in-read-holder.played {
+#ad-in-read-holder.expanded {
   max-height: 1000px;
 }
 
-video {
+#ad-in-read-holder .poster-button {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+#ad-in-read-holder.paused .poster-button {
+  display: block;
+}
+
+#ad-in-read-holder video#video-inread {
   width: 100%;
   height: auto;
   margin: 0;
