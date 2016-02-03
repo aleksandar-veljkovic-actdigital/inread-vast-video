@@ -1,5 +1,15 @@
 ;
 (function () {
+  
+  // templating & referencing objects
+  var player = $('<video id="video-inread" preload="auto" autoplay class="video-inread"></video>')[0];
+  var $container = $('#ad-in-read-holder');  
+  $('<div class="video-inread-wrap"></div>').append( player ).append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />').appendTo($container);  
+
+  // no inread banner on page
+  if($container.length===0) {
+    return;
+  }
 
   // dev/production fixes
   window.ox_vars = window.ox_vars || {
@@ -11,13 +21,8 @@
   window.ox_vars.init();
   var custVars = ox_vars.setVars();
   var oxParms = custVars !== '' ? '/' + custVars : '';
-  var VASTURL = window.inreadVastVideoVASTURL || '/preroll/544403' + oxParms;   //var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
+  var VASTURL = window.inreadVastVideoVASTURL || '/preroll/537209182' + oxParms;   //var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
   
-  // templating & referencing objects
-  var player = $('<video id="video-inread" preload="auto" autoplay class="video-inread"></video>')[0];
-  var $container = $('#ad-in-read-holder');  
-  $('<div class="video-inread-wrap"></div>').append( player ).append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />').appendTo($container);  
-
   // pull vast file
   var vast = new dynamicVast(VASTURL);
 
