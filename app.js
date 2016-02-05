@@ -41,7 +41,7 @@
       // impresion
       //var impresionImg = new Image();
       //impresionImg.src = vast.impresion;
-      $container.append("<img scr='"+vast.impresion+"' style='position:absolute;'>");
+      $container.append("<img src='"+vast.impresion+"' style='position:absolute;top:0;left:0;z-index:999999;'>");
       
       // functionalities
       $container.on('click', function () {
