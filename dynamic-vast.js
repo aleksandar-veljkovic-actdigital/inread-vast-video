@@ -12,6 +12,7 @@
       //dataType: 'text',
       success: function (result) {
         _this.result = result;
+        _this.impresion = $(result).find('Impression').text().trim();
         _this.mediaFileUrl = $(result).find('Linear MediaFiles MediaFile').text().trim();
         _this.clickTrought = $(result).find('Linear VideoClicks ClickThrough').text().trim();
         _this.trackingEventsXML = $(result).find('Linear TrackingEvents Tracking');

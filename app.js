@@ -37,6 +37,11 @@
   var inviewStart = function () {
 
     vastReady = function () {
+      
+      // impresion
+      var impresionImg = new Image();
+      impresionImg.src = vast.impresion;
+      
       // functionalities
       $container.on('click', function () {
         if (player.paused) {
