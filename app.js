@@ -39,8 +39,9 @@
     vastReady = function () {
       
       // impresion
-      var impresionImg = new Image();
-      impresionImg.src = vast.impresion;
+      //var impresionImg = new Image();
+      //impresionImg.src = vast.impresion;
+      $container.append("<img scr='"+vast.impresion+"' style='position:absolute;'>");
       
       // functionalities
       $container.on('click', function () {
@@ -84,6 +85,7 @@
         }
       });
       $(player).on('ended', function () {
+        $container.off('inview');
         $container.removeClass('expanded');
         player.src = "";
       });
