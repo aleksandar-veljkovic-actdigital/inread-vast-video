@@ -37,11 +37,8 @@
   var inviewStart = function () {
 
     vastReady = function () {
-      
-      // impresion
-      //var impresionImg = new Image();
-      //impresionImg.src = vast.impresion;
-      $container.append("<img src='"+vast.impresion+"' style='position:absolute;top:0;left:0;z-index:999999;'>");
+            
+      vast.impression();
       
       // functionalities
       $container.on('click', function () {

@@ -29,27 +29,30 @@
         $(_this).trigger('error', [jqXHR, textStatus, errorThrown]);
       }
     });
+    
+    this.impression = function(){
+      var impresionImg = new Image();
+      impresionImg.src = this.impresion;
+    };
 
     this.trackingEvents = {};
-
     var TrackingEventsCreator = function (trackingEventsXML) {
       $.each(trackingEventsXML, function (i, o) {
         var name = $(o).attr('event');
         var url = $(o).text().trim();
         _this.trackingEvents[name] = function () {
-          $.ajax({
-            url: url,
-            error: function (e) {
-              console.log(JSON.stringify(e));
-            }
-          });
-          return;
+          /*$.ajax({
+           url: url,
+           error: function (e) {
+           console.log(JSON.stringify(e));
+           }
+           });
+           return;*/
           var img = new Image();
-          img.src = url;
+          img.src = url+"&fix="+Math.floor(Date.now() / 1000);
         };
       });
     };
-
     this.track = function (name) {
       try {
         _this.trackingEvents[name]();
