@@ -22,7 +22,7 @@
   var custVars = ox_vars.setVars();
   var oxParms = (custVars !== '') ? custVars : '';
   //var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid=537209182&vars=' + oxParms;   //var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
-  var VASTURL =  'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
+  var VASTURL =  'http://diwanee-d.openx.net/v/1.0/av?auid=538258024';
   
   
   // pull vast file
