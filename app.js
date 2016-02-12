@@ -21,7 +21,9 @@
   window.ox_vars.init();
   var custVars = ox_vars.setVars();
   var oxParms = (custVars !== '') ? custVars : '';
-  var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid=537209182&vars=' + oxParms;   //var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
+  //var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid=537209182&vars=' + oxParms;   //var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
+  var VASTURL =  'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
+  
   
   // pull vast file
   var vast = new dynamicVast(VASTURL);
