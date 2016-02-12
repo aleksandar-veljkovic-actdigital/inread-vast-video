@@ -38,7 +38,10 @@
 
     vastReady = function () {
             
-      vast.impression();
+      // impresion
+      //var impresionImg = new Image();
+      //impresionImg.src = vast.impresion;
+      $container.append("<img scr='"+vast.impresion+"' style='position:absolute;'>");
       
       // functionalities
       $container.on('click', function () {
