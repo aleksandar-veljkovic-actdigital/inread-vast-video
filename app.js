@@ -55,6 +55,7 @@
           player.play();
         }
         else {
+          player.pause();
           window.open(
                   vast.clickTrought,
                   '_blank'
