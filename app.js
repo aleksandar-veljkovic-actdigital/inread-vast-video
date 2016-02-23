@@ -21,8 +21,8 @@
   window.ox_vars.init();
   var custVars = ox_vars.setVars();
   var oxParms = (custVars !== '') ? custVars : '';
-  //var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid=537209182&vars=' + oxParms;   //var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
-  var VASTURL =  'vast.php?auid=538258024&vars=' + oxParms;
+  var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid=538258025&vars=' + oxParms;   //var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
+  //var VASTURL =  'vast.php?auid=538258025';
   
   
   // pull vast file
@@ -40,13 +40,10 @@
 
     vastReady = function () {
             
-      // impresion
- 
+      // impresion 
       //var impresionImg = new Image();
       //impresionImg.src = vast.impresion;
-
-      //$container.append("<img scr='"+vast.impresion+"' style='position:absolute;'>");
-      
+      //$container.append("<img scr='"+vast.impresion+"' style='position:absolute;'>");      
       vast.impression();
       
       // functionalities
