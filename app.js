@@ -1,6 +1,6 @@
 ;
 (function () {
-  
+
   // templating & referencing objects
   var player = $('<video id="video-inread" preload="auto" autoplay class="video-inread"></video>')[0];
   var $wrap = $('#ad-in-read-holder');
@@ -11,6 +11,12 @@
   if($container.length===0) {
     return;
   }
+  
+  // mobil/tablet autoplay fix
+  $(window).one('touchend', function () {
+    player.play();
+    player.pause(); // <-- fixing analytics
+  });
 
   // dev/production fixes
   window.ox_vars = window.ox_vars || {
@@ -24,15 +30,15 @@
   var oxParms = (custVars !== '') ? custVars : '';
   var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid=538258025&vars=' + oxParms;   //var VASTURL = 'http://ox-d.clickmena.com/v/1.0/av?auid=537209182';
   //var VASTURL =  'vast.php?auid=538258025';
-  
-  
+
+
   // pull vast file
   var vast = new dynamicVast(VASTURL);
 
   // adVideo container is in view for the first time
   $container.one('inview', function (event, isInView) {
     if (isInView) {
-      inviewStart();
+      inviewStart();      
     }
   });
 
@@ -40,13 +46,13 @@
   var inviewStart = function () {
 
     vastReady = function () {
-            
+
       // impresion 
       //var impresionImg = new Image();
       //impresionImg.src = vast.impresion;
       //$container.append("<img scr='"+vast.impresion+"' style='position:absolute;'>");      
       vast.impression();
-      
+
       // functionalities
       $container.on('click', function () {
         if (player.paused) {
