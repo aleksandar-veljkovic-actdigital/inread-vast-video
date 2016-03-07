@@ -3,8 +3,9 @@
   
   // templating & referencing objects
   var player = $('<video id="video-inread" preload="auto" autoplay class="video-inread"></video>')[0];
-  var $container = $('#ad-in-read-holder');  
-  $('<div class="video-inread-wrap"></div>').append( player ).append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />').appendTo($container);  
+  var $wrap = $('#ad-in-read-holder');
+  var $container = $('<div class="video-inread-wrap"></div>');  
+  $container.append( player ).append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />').appendTo($wrap);  
 
   // no inread banner on page
   if($container.length===0) {
