@@ -2,7 +2,7 @@
 (function () {
 
   // templating & referencing objects
-  var player = $('<video id="video-inread" preload="auto" autoplay class="video-inread"></video>')[0];
+  var player = $('<video id="video-inread" preload="auto" class="video-inread"></video>')[0];
   var $wrap = $('#ad-in-read-holder');
   var $container = $('<div class="video-inread-wrap"></div>');  
   $container.append( player ).append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />').appendTo($wrap);  
@@ -12,11 +12,15 @@
     return;
   }
   
-  // mobil/tablet autoplay fix
-  $(window).one('touchend', function () {
-    player.play();
-    player.pause(); // <-- fixing analytics
-  });
+  // Android autoplay fix
+  if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+    $(window).one('touchend', function () {
+      player.play();
+      if (!$container.hasClass('expanded')) {
+        player.pause(); // <-- fixing analytics
+      }
+    });
+  }
 
   // dev/production fixes
   window.ox_vars = window.ox_vars || {
