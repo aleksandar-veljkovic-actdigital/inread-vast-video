@@ -5,7 +5,7 @@ $vars = (string) @$_GET['vars'];
 
 $params = str_replace(',', '/', $vars);
 
-$url = 'http://ox-d.clickmena.com/v/1.0/av?auid=' . $auid . base64_decode($params);
+$url = 'http://diwanee-d.openx.net/v/1.0/av?auid=' . $auid . base64_decode($params);
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
