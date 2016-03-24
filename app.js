@@ -1,16 +1,25 @@
 ;
 (function () {
 
-  // templating & referencing objects
-  var player = $('<video id="video-inread" preload="auto" class="video-inread"></video>')[0];
-  var $wrap = $('#ad-in-read-holder');
+  var skipAddDelay = 2016; // ms
   var $container = $('<div class="video-inread-wrap"></div>');  
-  $container.append( player ).append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />').appendTo($wrap);  
-
   // no inread banner on page
   if($container.length===0) {
     return;
-  }
+  }  
+  
+  // templating & referencing objects
+  var player = $('<video id="video-inread" preload="auto" class="video-inread"></video>')[0];
+  var $wrap = $('#ad-in-read-holder');
+  var $skipAd = $('<a href="#" class="ivv-skip-ad" ></a>');  
+  $container
+          .append( '<div class="ivv-ad-notation"></div>' )
+          .append( player )
+          .append($skipAd)
+          .append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />')
+          .appendTo($wrap);  
+
+
   
   // Android autoplay fix
   if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
@@ -58,16 +67,25 @@
       vast.impression();
 
       // functionalities
+      var terminator = function(){
+        $container.off('inview');
+        $container.removeClass('expanded');
+        player.src = "";        
+      };
+      $skipAd.on('click', function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        vast.track('close');
+        terminator();        
+      });      
       $container.on('click', function () {
         if (player.paused) {
           player.play();
         }
         else {
-          player.pause();
-          window.open(
-                  vast.clickTrought,
-                  '_blank'
-                  );
+          //player.pause();
+          window.open(vast.clickTrought, '_blank');
+          terminator();
         }
       });
       $container.addClass('paused');
@@ -100,9 +118,7 @@
         }
       });
       $(player).on('ended', function () {
-        $container.off('inview');
-        $container.removeClass('expanded');
-        player.src = "";
+        terminator();
       });
       // analytics
       $(player).one('play', function (e) {
@@ -165,6 +181,11 @@
       player.src = vast.mediaFileUrl;
       $container.addClass('expanded');
       player.play();
+      setTimeout(function () {
+        $skipAd.addClass('ivv-visible');
+      }, skipAddDelay);
+      
+      
     };
 
     // vast is ready -> play video 
