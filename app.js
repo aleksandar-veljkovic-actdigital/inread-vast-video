@@ -24,14 +24,14 @@
   
   
   // Android autoplay fix
-  if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+  //if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
     $(window).one('touchstart', function (e) {   
       player.play();
       if (!$container.hasClass('expanded')) {
         player.pause(); // <-- fixing analytics
       }
     });
-  }
+  //}
   
   // dev/production fixes
   window.ox_vars = window.ox_vars || {
