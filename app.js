@@ -9,7 +9,7 @@
   }  
   
   // templating & referencing objects
-  var player = $('<video id="video-inread" preload="auto" class="video-inread"></video>')[0];
+  var player = $('<video id="video-inread" preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
   var $wrap = $('#ad-in-read-holder');
   var $skipAd = $('<a href="#" class="ivv-skip-ad" ></a>');  
   $container
@@ -18,19 +18,21 @@
           .append($skipAd)
           .append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />')
           .appendTo($wrap);  
-
-
+    
+  player.controls = false;
+  player.crossOrigin = true;
+  
   
   // Android autoplay fix
   if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
-    $(window).one('touchend', function () {
+    $(window).one('touchstart', function (e) {   
       player.play();
       if (!$container.hasClass('expanded')) {
         player.pause(); // <-- fixing analytics
       }
     });
   }
-
+  
   // dev/production fixes
   window.ox_vars = window.ox_vars || {
     'init': function () {
@@ -57,7 +59,7 @@
 
   // go go go 
   var inviewStart = function () {
-
+    
     vastReady = function () {
 
       // impresion 
@@ -76,19 +78,24 @@
         e.stopPropagation();
         e.preventDefault();
         vast.track('close');
-        terminator();        
-      });      
+        terminator();
+      });
+
+      // not neaded because of pointer-events:none
+      //$(player).on('click', function(e){
+      //  e.preventDefault()
+      //});
+
       $container.on('click', function () {
         if (player.paused) {
           player.play();
         }
-        else {
-          //player.pause();
+        else if (player.currentTime > 0) {
           window.open(vast.clickTrought, '_blank');
           terminator();
         }
       });
-      $container.addClass('paused');
+           $container.addClass('paused');
       $(player).on('play', function () {
         $container.removeClass('paused');
       });
