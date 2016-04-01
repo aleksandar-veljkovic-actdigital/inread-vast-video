@@ -130,6 +130,9 @@
       $(player).on('ended', function () {
         terminator();
       });
+      $(player).on('webkitendfullscreen', function () {
+        terminator();
+      });
       // analytics
       $(player).one('play', function (e) {
         vast.track('start');
