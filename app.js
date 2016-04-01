@@ -72,7 +72,10 @@
       var terminator = function(){
         $container.off('inview');
         $container.removeClass('expanded');
-        player.src = "";        
+        player.src = "";
+        if (player.webkitExitFullscreen) {
+          player.webkitExitFullscreen();
+        }
       };
       $skipAd.on('click', function(e){
         e.stopPropagation();
@@ -95,7 +98,7 @@
           terminator();
         }
       });
-           $container.addClass('paused');
+      $container.addClass('paused');
       $(player).on('play', function () {
         $container.removeClass('paused');
       });
