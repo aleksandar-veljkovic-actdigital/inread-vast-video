@@ -1,5 +1,5 @@
 ;
-(function () {
+var inreadVastApp = function () {
 
   var skipAddDelay = 2016; // ms
   var $container = $('<div class="video-inread-wrap"></div>');  
@@ -43,7 +43,8 @@
   window.ox_vars.init();
   var custVars = ox_vars.setVars();
   var oxParms = (custVars !== '') ? custVars : '';
-  var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid=538258025&vars=' + oxParms;   //var VASTURL = 'http://diwanee-d.openx.net/v/1.0/av?auid=537209182';
+  
+  var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid='+ window.vastId + '&vars=' + oxParms || '/vast.php?auid=538258025&vars=' + oxParms;   //var VASTURL = 'http://diwanee-d.openx.net/v/1.0/av?auid=537209182';
   //var VASTURL =  'vast.php?auid=538258025';
 
 
@@ -212,4 +213,11 @@
 
   };
 
-})();
+};
+
+$(window).on('message', function (e) {
+  if (e.originalEvent.data.indexOf('ad-in-read-data') === 0) {
+    window.vastId = e.originalEvent.data.match(/ad-in-read-data-(.*)/)[1];    
+    inreadVastApp();
+  }
+});
