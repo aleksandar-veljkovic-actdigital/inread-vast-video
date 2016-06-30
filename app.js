@@ -1,6 +1,7 @@
 ;
 var inreadVastApp = function () {
 
+  var $wrap = $('#ad-in-read-vast-holder');
   var skipAddDelay = 2016; // ms
   var $container = $('<div class="video-inread-wrap"></div>');  
   // no inread banner on page
@@ -10,7 +11,6 @@ var inreadVastApp = function () {
   
   // templating & referencing objects
   var player = $('<video id="video-inread" preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
-  var $wrap = $('#ad-in-read-holder');
   var $skipAd = $('<a href="#" class="ivv-skip-ad" ></a>');  
   $container
           .append( '<div class="ivv-ad-notation"></div>' )
@@ -217,6 +217,7 @@ var inreadVastApp = function () {
 
 $(window).on('message', function (e) {
   if (e.originalEvent.data.indexOf('ad-in-read-data') === 0) {
+    console.log(e.originalEvent)
     window.vastId = e.originalEvent.data.match(/ad-in-read-data-(.*)/)[1];    
     inreadVastApp();
   }

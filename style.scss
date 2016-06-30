@@ -1,14 +1,18 @@
 // inread-vast-video
-#ad-in-read-holder .video-inread-wrap {
+#ad-in-read-vast-holder iframe {
+  display: block;
+}
+#ad-in-read-vast-holder .video-inread-wrap {
   max-height: 0;
   overflow: hidden;
   transition: all 1s;
   position: relative;
+  overflow: hidden;
 }
-#ad-in-read-holder .video-inread-wrap.expanded {
+#ad-in-read-vast-holder .video-inread-wrap.expanded {
   max-height: 1000px;
 }
-#ad-in-read-holder .video-inread-wrap .poster-button {
+#ad-in-read-vast-holder .video-inread-wrap .poster-button {
   display: none;
   position: absolute;
   top: 50%;
@@ -17,10 +21,10 @@
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
 }
-#ad-in-read-holder .video-inread-wrap.paused .poster-button {
+#ad-in-read-vast-holder .video-inread-wrap.paused .poster-button {
   display: block;
 }
-#ad-in-read-holder .video-inread-wrap video#video-inread {
+#ad-in-read-vast-holder .video-inread-wrap video#video-inread {
   width: 100%;
   height: auto;
   margin: 0;
