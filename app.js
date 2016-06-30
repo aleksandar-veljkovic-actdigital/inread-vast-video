@@ -111,7 +111,7 @@ var inreadVastApp = function () {
       }
       else {
         player.muted = true;
-        $(player).hover(
+        $container.hover(
                 function () {
                   player.muted = false;
                 },
@@ -217,7 +217,6 @@ var inreadVastApp = function () {
 
 $(window).on('message', function (e) {
   if (e.originalEvent.data.indexOf('ad-in-read-data') === 0) {
-    console.log(e.originalEvent)
     window.vastId = e.originalEvent.data.match(/ad-in-read-data-(.*)/)[1];    
     inreadVastApp();
   }
