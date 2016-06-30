@@ -1,7 +1,7 @@
 ;
 var inreadVastApp = function () {
 
-  var $wrap = $('#ad-in-read-vast-holder');
+  var $wrap = $('.in-read-vast-player-holder');
   var skipAddDelay = 2016; // ms
   var $container = $('<div class="video-inread-wrap"></div>');  
   // no inread banner on page
