@@ -85,3 +85,23 @@
 .ivv-skip-ad.ivv-visible {
   display: block;
 }
+.ivv-ctb {
+  $height: 30px;
+  width: 100%;
+  height: $height;
+  background-color: #545454;
+  color: white;
+  text-align: center;
+  &:after {
+    content: 'Find out more';
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    //text-shadow: 0px 0px 2px black;
+    text-decoration: none;
+  }
+  &:after {
+    content: 'إكتشفي المزيد';
+  }
+
+}

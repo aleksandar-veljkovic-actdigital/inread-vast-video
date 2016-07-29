@@ -78,6 +78,15 @@ var inreadVastApp = function () {
           player.webkitExitFullscreen();
         }
       };
+      var addClickTroughButton = function(){
+        var $button = $("<div class='ivv-ctb'>&nbsp;</div>");
+        $wrap.append($button);
+        $button.on('click', function(){
+          window.open(vast.clickTrought, '_blank');
+          $button.remove();
+          terminator();
+        });        
+      };
       $skipAd.on('click', function(e){
         e.stopPropagation();
         e.preventDefault();
@@ -131,8 +140,9 @@ var inreadVastApp = function () {
       $(player).on('ended', function () {
         terminator();
       });
-      $(player).on('webkitendfullscreen', function () {
-        terminator();
+      // add iphone exit fullscreen clicktrough button 
+      $(player).one('webkitendfullscreen', function () {
+        addClickTroughButton();      
       });
       // analytics
       $(player).one('play', function (e) {
