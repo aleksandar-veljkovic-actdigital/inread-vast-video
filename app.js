@@ -1,6 +1,15 @@
 ;
 var inreadVastApp = function () {
-
+  
+  window.ox_vars.init();
+  var custVars = ox_vars.setVars();
+  var oxParms = (custVars !== '') ? custVars : '';
+  var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid='+ window.vastId + '&vars=' + oxParms || '/vast.php?auid=538258025&vars=' + oxParms;   //var VASTURL = 'http://diwanee-d.openx.net/v/1.0/av?auid=537209182';
+  //var VASTURL =  'vast.php?auid=538258025';
+    
+  var imgBaseUrl = window.inreadVastVideoImgBaseUrl || '/assets/images/';
+  
+  
   var $wrap = $('.in-read-vast-player-holder');
   var skipAddDelay = 2016; // ms
   var $container = $('<div class="video-inread-wrap"></div>');  
@@ -14,9 +23,8 @@ var inreadVastApp = function () {
   var $skipAd = $('<a href="#" class="ivv-skip-ad" ></a>');  
   $container
           .append( '<div class="ivv-ad-notation"></div>' )
-          .append( player )
-          .append($skipAd)
-          .append('<img class="poster-button" src="http://www.yasmina.com/assets/images/desktop-video-play-btn.png" alt="" />')
+          .append( $("<div class='ivv-video-wrap' />").append(player).append($skipAd) )          
+          .append('<img class="poster-button" src="'+ imgBaseUrl +'desktop-video-play-btn.png" alt="" />')
           .appendTo($wrap);  
     
   player.controls = false;
@@ -40,12 +48,7 @@ var inreadVastApp = function () {
     'setVars': function () {
       return "";
     }};
-  window.ox_vars.init();
-  var custVars = ox_vars.setVars();
-  var oxParms = (custVars !== '') ? custVars : '';
   
-  var VASTURL = window.inreadVastVideoVASTURL || '/vast.php?auid='+ window.vastId + '&vars=' + oxParms || '/vast.php?auid=538258025&vars=' + oxParms;   //var VASTURL = 'http://diwanee-d.openx.net/v/1.0/av?auid=537209182';
-  //var VASTURL =  'vast.php?auid=538258025';
 
 
   // pull vast file
@@ -62,7 +65,7 @@ var inreadVastApp = function () {
   var inviewStart = function () {
     
     vastReady = function () {
-
+      
       // impresion 
       //var impresionImg = new Image();
       //impresionImg.src = vast.impresion;
@@ -80,13 +83,14 @@ var inreadVastApp = function () {
       };
       var addClickTroughButton = function(){
         var $button = $("<div class='ivv-ctb'>&nbsp;</div>");
-        $wrap.append($button);
+        $container.append($button);
         $button.on('click', function(){
           window.open(vast.clickTrought, '_blank');
           $button.remove();
           terminator();
         });        
       };
+      addClickTroughButton();
       $skipAd.on('click', function(e){
         e.stopPropagation();
         e.preventDefault();
@@ -137,12 +141,18 @@ var inreadVastApp = function () {
           player.pause();
         }
       });
+      
       $(player).on('ended', function () {
+        if (navigator.userAgent.match(/iPhone/i)) {
+          player.webkitExitFullscreen();
+          return;
+        }
         terminator();
       });
-      // add iphone exit fullscreen clicktrough button 
-      $(player).one('webkitendfullscreen', function () {
-        addClickTroughButton();      
+        
+      // iphone exit fullscreen
+      $(player).on('webkitendfullscreen', function () {
+        player.pause();
       });
       // analytics
       $(player).one('play', function (e) {

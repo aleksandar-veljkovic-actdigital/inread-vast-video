@@ -64,26 +64,31 @@
     }
   }
 }
-.ivv-skip-ad {
-  display: none;
-  position: absolute;
-  bottom: 9px;
-  right: 4px;
-  text-decoration: none;
-  &:after {
-    content: 'Skip Ad >>>';
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    text-shadow: 0px 0px 2px black;
+.ivv-video-wrap {
+  position: relative;
+  .ivv-skip-ad {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 4px;
     text-decoration: none;
+    &:after {
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      text-shadow: 0px 0px 2px black;
+      text-decoration: none;
+    }
+    &:hover {
+      text-decoration: none;
+    }
   }
-  &:hover {
-    text-decoration: none;
+  .ivv-skip-ad.ivv-visible {
+    display: block;
   }
 }
-.ivv-skip-ad.ivv-visible {
-  display: block;
+.ivv-skip-ad:after {
+  content: 'Skip Ad >>>';
 }
 .ivv-ctb {
   $height: 30px;
@@ -92,6 +97,7 @@
   background-color: #545454;
   color: white;
   text-align: center;
+  margin-bottom: 1rem;
   &:after {
     content: 'Find out more';
     color: white;
