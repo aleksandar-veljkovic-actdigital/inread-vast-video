@@ -1,18 +1,22 @@
-/* line 2, style.scss */
-#ad-in-read-holder .video-inread-wrap {
+@charset "UTF-8";
+/* line 3, style.scss */
+.in-read-vast-player-holder iframe {
+  display: block;
+}
+/* line 6, style.scss */
+.in-read-vast-player-holder .video-inread-wrap {
   max-height: 0;
   overflow: hidden;
   transition: all 1s;
   position: relative;
+  overflow: hidden;
 }
-
-/* line 8, style.scss */
-#ad-in-read-holder .video-inread-wrap.expanded {
+/* line 13, style.scss */
+.in-read-vast-player-holder .video-inread-wrap.expanded {
   max-height: 1000px;
 }
-
-/* line 11, style.scss */
-#ad-in-read-holder .video-inread-wrap .poster-button {
+/* line 16, style.scss */
+.in-read-vast-player-holder .video-inread-wrap .poster-button {
   display: none;
   position: absolute;
   top: 50%;
@@ -21,20 +25,18 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-
-/* line 20, style.scss */
-#ad-in-read-holder .video-inread-wrap.paused .poster-button {
+/* line 25, style.scss */
+.in-read-vast-player-holder .video-inread-wrap.paused .poster-button {
   display: block;
 }
-
-/* line 23, style.scss */
-#ad-in-read-holder .video-inread-wrap video#video-inread {
+/* line 28, style.scss */
+.in-read-vast-player-holder .video-inread-wrap video#video-inread {
   width: 100%;
   height: auto;
   margin: 0;
 }
 
-/* line 29, style.scss */
+/* line 35, style.scss */
 .ivv-ad-notation {
   border-bottom: 1px solid #999999;
   margin-bottom: 1rem;
@@ -43,7 +45,7 @@
   position: relative;
   overflow: visible;
 }
-/* line 36, style.scss */
+/* line 42, style.scss */
 .ivv-ad-notation:after {
   content: 'Advertisement';
   font-size: 13px;
@@ -60,40 +62,69 @@
 }
 
 @media (max-width: 800px) {
-  /* line 52, style.scss */
+  /* line 58, style.scss */
   .ivv-ad-notation {
     border-bottom: 1px solid #ccc;
   }
-  /* line 54, style.scss */
+  /* line 60, style.scss */
   .ivv-ad-notation:after {
     color: #787878;
     font-family: "Noto Kufi Arabic", "Noto Serif", serif;
     font-size: 0.875rem;
   }
 }
-/* line 61, style.scss */
-.ivv-skip-ad {
+/* line 67, style.scss */
+.ivv-video-wrap {
+  position: relative;
+}
+/* line 69, style.scss */
+.ivv-video-wrap .ivv-skip-ad {
   display: none;
   position: absolute;
-  bottom: 9px;
+  bottom: 10px;
   right: 4px;
   text-decoration: none;
 }
-/* line 67, style.scss */
-.ivv-skip-ad:after {
-  content: 'Skip Ad >>>';
+/* line 75, style.scss */
+.ivv-video-wrap .ivv-skip-ad:after {
   color: white;
   font-size: 1rem;
   font-weight: bold;
   text-shadow: 0px 0px 2px black;
   text-decoration: none;
 }
-/* line 75, style.scss */
-.ivv-skip-ad:hover {
+/* line 82, style.scss */
+.ivv-video-wrap .ivv-skip-ad:hover {
   text-decoration: none;
 }
-
-/* line 79, style.scss */
-.ivv-skip-ad.ivv-visible {
+/* line 86, style.scss */
+.ivv-video-wrap .ivv-skip-ad.ivv-visible {
   display: block;
+}
+
+/* line 90, style.scss */
+.ivv-skip-ad:after {
+  content: 'Skip Ad >>>';
+}
+
+/* line 93, style.scss */
+.ivv-ctb {
+  width: 100%;
+  height: 30px;
+  background-color: #545454;
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+/* line 101, style.scss */
+.ivv-ctb:after {
+  content: 'Find out more';
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+/* line 109, style.scss */
+.ivv-ctb:after {
+  content: 'إكتشفي المزيد';
 }
