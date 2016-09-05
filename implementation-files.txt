@@ -1,0 +1,13 @@
+	modified:   app/Harmony/Middleware/Openx.php
+	modified:   bower.json
+	modified:   public/js/app.js
+	modified:   public/scss/app.scss
+	modified:   templates/includes/esi-footer.twig
+	modified:   templates/pages/article.twig
+
+Untracked files:
+	public/assets/images/desktop-video-play-btn.png
+	public/assets/images/mobile-video-play-btn.png
+	public/scss/ads/_ad-inread-vast-video.scss
+	public/vast.php
+
