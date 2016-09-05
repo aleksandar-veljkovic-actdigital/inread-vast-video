@@ -233,7 +233,7 @@ var inreadVastApp = function () {
 };
 
 $(window).on('message', function (e) {
-  if (e.originalEvent.data.indexOf('ad-in-read-data') === 0) {
+  if (typeof(e.originalEvent.data)==="string" && e.originalEvent.data.indexOf('ad-in-read-data') === 0) {
     window.vastId = e.originalEvent.data.match(/ad-in-read-data-(.*)/)[1];    
     inreadVastApp();
   }
