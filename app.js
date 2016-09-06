@@ -147,9 +147,13 @@ var inreadVastApp = function () {
         terminator();
       });
         
-      // iphone exit fullscreen
+      // iphone exit/enter fullscreen
       $(player).on('webkitendfullscreen', function () {
         player.pause();
+        $container.off('inview');
+      });
+      $(player).on('webkitbeginfullscreen', function () {
+        player.play();
       });
       // analytics
       $(player).one('play', function (e) {
