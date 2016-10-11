@@ -26,7 +26,7 @@ var inreadVastApp = function () {
   }  
   
   // templating & referencing objects
-  var player = $('<video id="video-inread" preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
+  var player = $('<video id="video-inread" playsinline preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
   var $skipAd = $('<a href="#" class="ivv-skip-ad" ></a>');  
   $container
           .append( '<div class="ivv-ad-notation"></div>' )
