@@ -26,7 +26,8 @@ var inreadVastApp = function () {
   }  
   
   // templating & referencing objects
-  var player = $('<video id="video-inread" playsinline preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
+  var playsinline = ($('html').hasClass('ua-device-iphone') && $('html').hasClass('ua-browser-name-chrome')) ? "" : "playsinline"; // bug fix :: 24.10.2016. :: chrome on iphone no video yes audio 
+  var player = $('<video id="video-inread" ' + playsinline + ' preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
   var $skipAd = $('<a href="#" class="ivv-skip-ad" ></a>');  
   $container
           .append( '<div class="ivv-ad-notation"></div>' )
