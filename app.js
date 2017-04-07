@@ -26,7 +26,11 @@ var inreadVastApp = function () {
   }  
   
   // templating & referencing objects
-  var player = $('<video id="video-inread" playsinline preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
+  var autopleyMuted = "";
+  if (navigator.userAgent.match(/Android/i) && parseInt(navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./)[2]) > 53) {
+    autopleyMuted = "autoplay muted";
+  } 
+  var player = $('<video id="video-inread" ' + autopleyMuted + ' playsinline preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
   var $skipAd = $('<a href="#" class="ivv-skip-ad" ></a>');  
   $container
           .append( '<div class="ivv-ad-notation"></div>' )
@@ -38,15 +42,13 @@ var inreadVastApp = function () {
   player.crossOrigin = true;
   
   
-  // Android autoplay fix
-  //if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
-    $(window).one('touchstart', function (e) {   
-      player.play();
-      if (!$container.hasClass('expanded')) {
-        player.pause(); // <-- fixing analytics
-      }
-    });
-  //}
+  // iPhone autoplay fix
+  $(window).one('touchstart', function (e) {   
+    player.play();
+    if (!$container.hasClass('expanded')) {
+      player.pause(); // <-- fixing analytics
+    }
+  });
 
   // pull vast file
   var vast = new dynamicVast(VASTURL);
@@ -117,7 +119,9 @@ var inreadVastApp = function () {
         $container.addClass('paused');
       });
       if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
-        player.muted = false;
+        if (!autopleyMuted) {
+          player.muted = false;
+        }        
       }
       else {
         player.muted = true;
