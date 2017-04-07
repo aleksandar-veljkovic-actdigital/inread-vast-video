@@ -27,7 +27,7 @@ var inreadVastApp = function () {
   
   // templating & referencing objects
   var autopleyMuted = "";
-  if (navigator.userAgent.match(/Android/i) && parseInt(navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./)[2]) > 53) {
+  if (navigator.userAgent.match(/Android/i) && parseInt(navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./)[2]) >= 53) {
     autopleyMuted = "autoplay muted";
   } 
   var player = $('<video id="video-inread" ' + autopleyMuted + ' playsinline preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
@@ -105,6 +105,9 @@ var inreadVastApp = function () {
       $container.on('click', function () {
         if (player.paused) {
           player.play();
+          if (player.muted) {
+            player.muted = false;
+          }          
         }
         else if (player.currentTime > 0) {
           window.open(vast.clickTrought, '_blank');
