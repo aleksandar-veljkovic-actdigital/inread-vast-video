@@ -147,7 +147,7 @@ var inreadVastApp = function () {
       });
       
       $(player).on('ended', function () {
-        if (navigator.userAgent.match(/iPhone/i)) {
+        if (navigator.userAgent.match(/iPhone/i) && !('playsInline' in document.createElement('video'))) {
           player.webkitExitFullscreen();
           return;
         }
