@@ -218,7 +218,7 @@ var inreadVastApp = function () {
       if (vast.mediaFileUrl.toLowerCase().indexOf("kaltura") !== -1) {
         var partnerId = vast.mediaFileUrl.match(/\/p\/([0-9]+)\//)[1];
         var entityId = vast.mediaFileUrl.match(/\/entryId\/([A-Za-z0-9\-\_]+)\//)[1];
-        player.poster = "http://cfvod.kaltura.com/p/" + partnerId + "/thumbnail/entry_id/" + entityId + "/width/600";
+        player.poster = location.protocol + "//cfvod.kaltura.com/p/" + partnerId + "/thumbnail/entry_id/" + entityId + "/width/600";
       }
       player.src = vast.mediaFileUrl;
       $container.addClass('expanded');
