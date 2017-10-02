@@ -35,7 +35,7 @@ var inreadVastApp = function () {
   $container
           .append( '<div class="ivv-ad-notation"></div>' )
           .append( $("<div class='ivv-video-wrap' />").append(player).append($skipAd) )          
-          .append('<img class="poster-button" src="'+ imgBaseUrl +'desktop-video-play-btn.png" alt="" />')
+          .append('<div class="poster-button ivv-poster-button"></div>')
           .appendTo($wrap);  
     
   player.controls = false;

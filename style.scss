@@ -16,6 +16,10 @@
   .video-inread-wrap .poster-button {
     display: none;
     position: absolute;
+    width: 111px;
+    height: 111px;
+    background-repeat: no-repeat;
+    background-size: cover;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%,-50%);
@@ -110,4 +114,8 @@
     content: 'إكتشفي المزيد';
   }
 
+}
+
+.ivv-poster-button {
+  background-image: url(/assets/images/desktop-video-play-btn.png);
 }

@@ -19,24 +19,28 @@
 .in-read-vast-player-holder .video-inread-wrap .poster-button {
   display: none;
   position: absolute;
+  width: 111px;
+  height: 111px;
+  background-repeat: no-repeat;
+  background-size: cover;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 25, style.scss */
+/* line 29, style.scss */
 .in-read-vast-player-holder .video-inread-wrap.paused .poster-button {
   display: block;
 }
-/* line 28, style.scss */
+/* line 32, style.scss */
 .in-read-vast-player-holder .video-inread-wrap video#video-inread {
   width: 100%;
   height: auto;
   margin: 0;
 }
 
-/* line 35, style.scss */
+/* line 39, style.scss */
 .ivv-ad-notation {
   border-bottom: 1px solid #999999;
   margin-bottom: 1rem;
@@ -45,7 +49,7 @@
   position: relative;
   overflow: visible;
 }
-/* line 42, style.scss */
+/* line 46, style.scss */
 .ivv-ad-notation:after {
   content: 'Advertisement';
   font-size: 13px;
@@ -62,22 +66,22 @@
 }
 
 @media (max-width: 800px) {
-  /* line 58, style.scss */
+  /* line 62, style.scss */
   .ivv-ad-notation {
     border-bottom: 1px solid #ccc;
   }
-  /* line 60, style.scss */
+  /* line 64, style.scss */
   .ivv-ad-notation:after {
     color: #787878;
     font-family: "Noto Kufi Arabic", "Noto Serif", serif;
     font-size: 0.875rem;
   }
 }
-/* line 67, style.scss */
+/* line 71, style.scss */
 .ivv-video-wrap {
   position: relative;
 }
-/* line 69, style.scss */
+/* line 73, style.scss */
 .ivv-video-wrap .ivv-skip-ad {
   display: none;
   position: absolute;
@@ -85,7 +89,7 @@
   right: 4px;
   text-decoration: none;
 }
-/* line 75, style.scss */
+/* line 79, style.scss */
 .ivv-video-wrap .ivv-skip-ad:after {
   color: white;
   font-size: 1rem;
@@ -93,21 +97,21 @@
   text-shadow: 0px 0px 2px black;
   text-decoration: none;
 }
-/* line 82, style.scss */
+/* line 86, style.scss */
 .ivv-video-wrap .ivv-skip-ad:hover {
   text-decoration: none;
 }
-/* line 86, style.scss */
+/* line 90, style.scss */
 .ivv-video-wrap .ivv-skip-ad.ivv-visible {
   display: block;
 }
 
-/* line 90, style.scss */
+/* line 94, style.scss */
 .ivv-skip-ad:after {
   content: 'Skip Ad >>>';
 }
 
-/* line 93, style.scss */
+/* line 97, style.scss */
 .ivv-ctb {
   width: 100%;
   height: 30px;
@@ -116,7 +120,7 @@
   text-align: center;
   margin-bottom: 1rem;
 }
-/* line 101, style.scss */
+/* line 105, style.scss */
 .ivv-ctb:after {
   content: 'Find out more';
   color: white;
@@ -124,7 +128,12 @@
   font-weight: bold;
   text-decoration: none;
 }
-/* line 109, style.scss */
+/* line 113, style.scss */
 .ivv-ctb:after {
   content: 'إكتشفي المزيد';
+}
+
+/* line 119, style.scss */
+.ivv-poster-button {
+  background-image: url(/assets/images/desktop-video-play-btn.png);
 }
