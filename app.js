@@ -19,37 +19,25 @@ var inreadVastApp = function () {
   
   var $wrap = $('.in-read-vast-player-holder');
   var skipAddDelay = 2016; // ms
-  var $container = $('<div class="video-inread-wrap"></div>');  
+  var $container = $('<div class="video-inread-wrap muted"></div>');  
   // no inread banner on page
   if($container.length===0) {
     return;
   }  
   
   // templating & referencing objects
-  var autopleyMuted = "";
-  if (navigator.userAgent.match(/Android/i) && parseInt(navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./)[2]) >= 53) {
-    autopleyMuted = "autoplay muted";
-  } 
-  var player = $('<video id="video-inread" ' + autopleyMuted + ' playsinline preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
-  var $skipAd = $('<a href="#" class="ivv-skip-ad" ></a>');  
+  var player = $('<video id="video-inread" autoplay muted playsinline preload="auto" class="video-inread" style="pointer-events:none"></video>')[0]; //  pointer-events disables play for <video>.click
+  var $skipAd = $('<a href="#" class="ivv-skip-ad" ></a>'); 
+  var $speaker = $('<a href="#" class="ivv-speaker"></a>');
   $container
           .append( '<div class="ivv-ad-notation"></div>' )
-          .append( $("<div class='ivv-video-wrap' />").append(player).append($skipAd) )          
+          .append( $("<div class='ivv-video-wrap' />").append(player).append($skipAd).append($speaker) )          
           .append('<div class="poster-button ivv-poster-button"></div>')
           .appendTo($wrap);  
     
   player.controls = false;
   player.crossOrigin = true;
   
-  
-  // iPhone autoplay fix
-  $(window).one('touchstart', function (e) {   
-    player.play();
-    if (!$container.hasClass('expanded')) {
-      player.pause(); // <-- fixing analytics
-    }
-  });
-
   // pull vast file
   var vast = new dynamicVast(VASTURL);
 
@@ -104,15 +92,20 @@ var inreadVastApp = function () {
 
       $container.on('click', function () {
         if (player.paused) {
-          player.play();
+          player.play();        
           if (player.muted) {
             player.muted = false;
-          }          
+          }
         }
         else if (player.currentTime > 0) {
           window.open(vast.clickTrought, '_blank');
           terminator();
         }
+      });
+      $speaker.on('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        player.muted = (player.muted) ? false : true;
       });
       $container.addClass('paused');
       $(player).on('play', function () {
@@ -121,22 +114,6 @@ var inreadVastApp = function () {
       $(player).on('pause', function () {
         $container.addClass('paused');
       });
-      if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
-        if (!autopleyMuted) {
-          player.muted = false;
-        }        
-      }
-      else {
-        player.muted = true;
-        $container.hover(
-                function () {
-                  player.muted = false;
-                },
-                function () {
-                  player.muted = true;
-                }
-        );
-      }
       $container.on('inview', function (event, isInView) {
         if (isInView) {
           player.play();
@@ -177,9 +154,11 @@ var inreadVastApp = function () {
       $(player).on('volumechange', function (e) {
         if (!player.paused) {
           if (player.muted) {
+            $container.addClass('muted');
             vast.track('mute');
           }
           else {
+            $container.removeClass('muted');
             vast.track('unmute');
           }
         }

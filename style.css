@@ -133,7 +133,32 @@
   content: 'إكتشفي المزيد';
 }
 
-/* line 119, style.scss */
+/* line 117, style.scss */
+.ivv-speaker {
+  position: absolute;
+  left: 1px;
+  bottom: 0px;
+  display: block;
+  padding: 30px 25px 8px 2.5%;
+  text-decoration: none;
+}
+/* line 124, style.scss */
+.ivv-speaker:after {
+  font-family: VideoJS;
+  font-weight: normal;
+  color: white;
+  font-size: 1.2rem;
+  content: "\e006";
+  text-shadow: 0px 0px 2px black;
+  text-decoration: none;
+}
+
+/* line 134, style.scss */
+.video-inread-wrap.muted .ivv-speaker:after {
+  content: "\e003";
+}
+
+/* line 139, style.scss */
 .ivv-poster-button {
   background-image: url(/assets/images/desktop-video-play-btn.png);
 }
