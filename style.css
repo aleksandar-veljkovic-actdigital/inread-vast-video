@@ -141,8 +141,9 @@
   display: block;
   padding: 30px 25px 8px 2.5%;
   text-decoration: none;
+  font-weight: normal;
 }
-/* line 124, style.scss */
+/* line 125, style.scss */
 .ivv-speaker:after {
   font-family: VideoJS;
   font-weight: normal;
@@ -152,13 +153,17 @@
   text-shadow: 0px 0px 2px black;
   text-decoration: none;
 }
-
 /* line 134, style.scss */
+.ivv-speaker:hover {
+  text-decoration: none;
+}
+
+/* line 138, style.scss */
 .video-inread-wrap.muted .ivv-speaker:after {
   content: "\e003";
 }
 
-/* line 139, style.scss */
+/* line 143, style.scss */
 .ivv-poster-button {
   background-image: url(/assets/images/desktop-video-play-btn.png);
 }
