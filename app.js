@@ -165,11 +165,13 @@ var inreadVastApp = function () {
       });
       var pct75 = function () {
         vast.track('thirdQuartile');
+        window.inreadVastKruks['pct75']();
         pct75 = function () {
         };
       };
       var pct50 = function () {
         vast.track('midpoint');
+        window.inreadVastKruks['pct50']();
         pct50 = function () {
         };
       };
@@ -222,9 +224,35 @@ var inreadVastApp = function () {
 
 };
 
+
+/*
+window.postMessage("ad-in-read-krux-"+JSON.stringify({
+  pct75: ['ns:webedia','admEvent', 'LmWbNhCi', {Time:'2'}],
+  pct50: ['ns:webedia','admEvent', 'LmWaWYUc', {Time:'1'}]
+}), "*")
+*/
+window.inreadVastKruks = {
+  pct75: function(){
+    if (!window.inreadVastKruksData) {return;}
+    window.Krux.apply(null, window.inreadVastKruksData['pct75']);
+  },
+  pct50: function(){
+    if (!window.inreadVastKruksData) {return;}
+    window.Krux.apply(null, window.inreadVastKruksData['pct50']);
+  }  
+};
+
+
+
+
 $(window).on('message', function (e) {
   if (typeof(e.originalEvent.data)==="string" && e.originalEvent.data.indexOf('ad-in-read-data') === 0) {
     window.vastId = e.originalEvent.data.match(/ad-in-read-data-(.*)/)[1];    
     inreadVastApp();
   }
+  if (typeof(e.originalEvent.data)==="string" && e.originalEvent.data.indexOf('ad-in-read-krux') === 0) {
+    var kruxData = e.originalEvent.data.match(/ad-in-read-krux-(.*)/)[1];
+    window.inreadVastKruksData = JSON.parse(kruxData);
+  }
 });
+
